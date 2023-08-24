@@ -50,7 +50,11 @@ func main() {
 	allStr, _ := c.AllStream(context.Background())
 	go func() {
 		for {
-			data, _ := allStr.Recv()
+			data, err := allStr.Recv()
+			if err != nil {
+				log.Println(err)
+				break
+			}
 			log.Println(data)
 		}
 	}()
